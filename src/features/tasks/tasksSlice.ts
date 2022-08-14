@@ -5,6 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
 import { Task } from "../../types";
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
+var add = require("date-fns/add");
 
 interface taskState {
   tasks: Task[];
@@ -13,7 +15,14 @@ interface taskState {
 }
 
 const initialState: taskState = {
-  tasks: [],
+  tasks: [
+    {
+      id: "1",
+      description: "Buy groceries",
+      creationDate: new Date(),
+      dueDate: new Date(),
+    },
+  ],
   status: "idle",
   error: "",
 };
