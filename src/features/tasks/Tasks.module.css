@@ -11,7 +11,7 @@
     justify-items: center;
     gap: .75rem;
     height: 8rem;
-    background-color: white;
+    background-color: var(--white);
     padding: 1rem;
     border-radius: .5rem;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
@@ -25,6 +25,13 @@
     justify-self: start;
 }
 
+.dates {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
 input[type=date] {
     font-family: var(--font-primary);
     font-size: 1rem;
@@ -33,4 +40,26 @@ input[type=date] {
 
 svg {
     font-size: 1.5rem;
+}
+
+@media only screen and (min-width: 400px) {
+
+    /* For desktop: */
+    .task {
+        display: grid;
+        grid-template-columns: 5% 50% 33% 1fr;
+        align-items: center;
+        justify-items: center;
+        gap: .75rem;
+        height: 10rem;
+        padding: 1rem;
+        border-radius: .5rem;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
+        font-size: 1.1rem;
+    }
+
+    svg {
+        font-size: 2.25rem;
+    }
+
 }

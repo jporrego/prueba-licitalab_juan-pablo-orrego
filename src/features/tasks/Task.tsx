@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  format,
+  formatDistance,
+  formatRelative,
+  subDays,
+  formatDistanceToNow,
+} from "date-fns";
 import { Task as TaskType } from "../../types";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import styles from "./Tasks.module.css";
@@ -12,7 +19,10 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     <div className={styles.task}>
       <input type="checkbox" />
       <div className={styles.description}>{task.description}</div>
-      <input type="Date"></input>
+      <div className={styles.dates}>
+        <div>Created {formatDistanceToNow(task.creationDate)} ago</div>
+        <input type="Date"></input>
+      </div>
       <BsFillCheckCircleFill></BsFillCheckCircleFill>
     </div>
   );

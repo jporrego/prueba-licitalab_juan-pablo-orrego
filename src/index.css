@@ -5,7 +5,7 @@
   --white: #fff;
   --blue: #026aa7;
   --red: #e4544a;
-  --grey: #d9dde6;
+  --grey: #ebecf0;
   /* Fonts */
   --font-primary: 'Noto Sans', sans-serif;
   /* Utilities */
@@ -25,4 +25,5 @@ body {
   font-family: var(--font-primary);
   font-size: 1.6rem;
   line-height: 1.4;
+  background-color: var(--grey);
 }
