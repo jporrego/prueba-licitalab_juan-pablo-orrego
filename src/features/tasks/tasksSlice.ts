@@ -17,8 +17,14 @@ interface taskState {
 const initialState: taskState = {
   tasks: [
     {
-      id: "1",
+      _id: "1",
       description: "Buy groceries",
+      creationDate: new Date(),
+      dueDate: new Date(),
+    },
+    {
+      _id: "2",
+      description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
     },
