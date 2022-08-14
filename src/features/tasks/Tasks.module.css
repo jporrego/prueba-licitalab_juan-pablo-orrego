@@ -28,7 +28,7 @@
 .dates {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: start;
     height: 100%;
 }
 
