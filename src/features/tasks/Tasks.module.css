@@ -5,9 +5,32 @@
 }
 
 .task {
+    display: grid;
+    grid-template-columns: min-content 50% 33% 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: .75rem;
     height: 8rem;
     background-color: white;
     padding: 1rem;
     border-radius: .5rem;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
+    font-size: 1rem;
+}
+
+.description {
+    max-width: 100%;
+    height: 100%;
+    overflow: auto;
+    justify-self: start;
+}
+
+input[type=date] {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+
+}
+
+svg {
+    font-size: 1.5rem;
 }

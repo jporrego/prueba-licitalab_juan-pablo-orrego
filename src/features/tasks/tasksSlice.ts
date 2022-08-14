@@ -18,7 +18,14 @@ const initialState: taskState = {
   tasks: [
     {
       _id: "1",
-      description: "Buy groceries",
+      description:
+        "Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries  Buy groceries Buy groceries Buy groceries Buy groceries",
+      creationDate: new Date(),
+      dueDate: new Date(),
+    },
+    {
+      _id: "2",
+      description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
     },

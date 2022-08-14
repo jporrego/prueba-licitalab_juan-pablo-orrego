@@ -1,4 +1,6 @@
 .app {
   padding: 1rem;
   background-color: rgb(221, 221, 221);
+  max-width: 60rem;
+  margin: 0 auto;
 }
