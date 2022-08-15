@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { format, formatDistanceToNow, compareAsc, compareDesc } from "date-fns";
 import { Task as TaskType } from "../../types";
-import {
-  BsFillCheckCircleFill,
-  BsFillClockFill,
-  BsFillXCircleFill,
-} from "react-icons/bs";
 import styles from "./Tasks.module.css";
 import { es as esLocale } from "date-fns/locale";
+import DateStateIcon from "../../components/date_state_icon/DateStateIcon";
 
 interface TaskProps {
   task: TaskType;
@@ -40,28 +36,6 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     console.log(new Date(e.target.value));
   };
 
-  const stateIcon = () => {
-    if (dateState === "onTime") {
-      return (
-        <div className={styles.stateIcon__onTime}>
-          <BsFillCheckCircleFill></BsFillCheckCircleFill>
-        </div>
-      );
-    } else if (dateState === "almostExpired") {
-      return (
-        <div className={styles.stateIcon__almostExpired}>
-          <BsFillClockFill></BsFillClockFill>
-        </div>
-      );
-    } else {
-      return (
-        <div className={styles.stateIcon__expired}>
-          <BsFillXCircleFill></BsFillXCircleFill>
-        </div>
-      );
-    }
-  };
-
   return (
     <div className={styles.task}>
       <input type="checkbox" />
@@ -84,7 +58,10 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         </div>
       </div>
 
-      <div className={styles.stateIcon}>{stateIcon()}</div>
+      <DateStateIcon
+        dateState={dateState}
+        setDateState={setDateState}
+      ></DateStateIcon>
     </div>
   );
 };
