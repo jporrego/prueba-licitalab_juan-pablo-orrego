@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   format,
   formatDistance,
@@ -16,6 +16,17 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ task }) => {
+  const [dueDate, setDueDate] = useState<string>(
+    format(new Date(), "yyyy-MM-dd")
+  );
+  useEffect(() => {
+    setDueDate(format(task.dueDate, "yyyy-MM-dd"));
+  }, []);
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
+  };
+
   return (
     <div className={styles.task}>
       <input type="checkbox" />
@@ -27,8 +38,14 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           })}`}
         </div>
         <div>
-          Due date: <input type="Date"></input>
+          Due date:
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => handleDateChange(e)}
+          ></input>
         </div>
+        <div>{format(task.dueDate, "dd/MM/yyyy")}</div>
       </div>
       <BsFillCheckCircleFill></BsFillCheckCircleFill>
     </div>

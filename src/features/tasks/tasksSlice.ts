@@ -18,10 +18,9 @@ const initialState: taskState = {
   tasks: [
     {
       _id: "1",
-      description:
-        "Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries Buy groceries  Buy groceries Buy groceries Buy groceries Buy groceries",
-      creationDate: new Date(),
-      dueDate: new Date(),
+      description: "Buy groceries.",
+      creationDate: new Date(new Date().getTime() - 520000000),
+      dueDate: new Date(new Date().getTime() + 1200000000),
     },
     {
       _id: "2",
@@ -30,31 +29,31 @@ const initialState: taskState = {
       dueDate: new Date(),
     },
     {
-      _id: "2",
+      _id: "3",
       description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
     },
     {
-      _id: "2",
+      _id: "4",
       description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
     },
     {
-      _id: "2",
+      _id: "5",
       description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
     },
     {
-      _id: "2",
+      _id: "6",
       description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
     },
     {
-      _id: "2",
+      _id: "7",
       description: "Water plants",
       creationDate: new Date(),
       dueDate: new Date(),
