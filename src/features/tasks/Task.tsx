@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { format, formatDistanceToNow } from "date-fns";
+import { format, formatDistanceToNow, compareAsc, compareDesc } from "date-fns";
 import { Task as TaskType } from "../../types";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import styles from "./Tasks.module.css";
@@ -10,13 +10,36 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ task }) => {
-  const [dueDate, setDueDate] = useState<string>(
-    format(new Date(), "yyyy-MM-dd")
-  );
+  const [dateState, setDateState] = useState<
+    "onTime" | "almostExpired" | "expired"
+  >();
   useEffect(() => {
-    setDueDate(format(task.dueDate, "yyyy-MM-dd"));
+    calculateDateState();
   }, []);
 
+  const calculateDateState = () => {
+    if (compareAsc(task.dueDate, new Date()) === -1) {
+      setDateState("expired");
+    } else {
+      setDateState("onTime");
+    }
+
+    if (format(task.dueDate, "dd") == format(new Date(), "dd")) {
+      setDateState("almostExpired");
+    }
+    /*
+    if (
+      format(task.dueDate, "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd")
+    ) {
+      setDateState("almostExpired");
+    } else if (compareAsc(task.dueDate, new Date())) {
+      setDateState("onTime");
+    } else {
+      setDateState("expired");
+    }*/
+
+    console.log(format(task.dueDate, "dd"), format(new Date(), "dd"));
+  };
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(new Date(e.target.value));
   };
@@ -37,9 +60,10 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           <div>Vencimiento: </div>
           <input
             type="date"
-            value={dueDate}
+            value={format(task.dueDate, "yyyy-MM-dd")}
             onChange={(e) => handleDateChange(e)}
           ></input>
+          {dateState}
         </div>
       </div>
 

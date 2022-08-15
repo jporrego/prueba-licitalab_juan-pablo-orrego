@@ -25,8 +25,8 @@ const initialState: taskState = {
     {
       _id: "2",
       description: "Water plants",
-      creationDate: new Date(new Date().getTime() - 1520000000),
-      dueDate: new Date(new Date().getTime() + 120000000),
+      creationDate: new Date(new Date().getTime() - 250000000),
+      dueDate: new Date(new Date().getTime() - 120000000),
     },
     {
       _id: "3",
