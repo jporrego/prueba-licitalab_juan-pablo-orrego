@@ -28,15 +28,21 @@
 .dates {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     gap: 1rem;
     height: 100%;
+}
+
+.dueDate {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: start;
 }
 
 input[type=date] {
     font-family: var(--font-primary);
     font-size: 1rem;
-
 }
 
 svg {
@@ -48,7 +54,7 @@ svg {
     /* For desktop: */
     .task {
         display: grid;
-        grid-template-columns: 5% 50% 33% 1fr;
+        grid-template-columns: 5% 40% 1fr max-content;
         align-items: center;
         justify-items: center;
         gap: .75rem;
