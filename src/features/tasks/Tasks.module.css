@@ -40,6 +40,18 @@
     justify-content: start;
 }
 
+.stateIcon__onTime {
+    color: var(--blue);
+}
+
+.stateIcon__almostExpired {
+    color: var(--yellow);
+}
+
+.stateIcon__expired {
+    color: var(--red);
+}
+
 input[type=date] {
     font-family: var(--font-primary);
     font-size: 1rem;

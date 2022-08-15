@@ -3,8 +3,9 @@
 :root {
   --black: #1e2d49;
   --white: #fff;
-  --blue: #026aa7;
-  --red: #e4544a;
+  --blue: #3a86ff;
+  --yellow: #ffbe0b;
+  --red: #ff006e;
   --grey: #ebecf0;
   /* Fonts */
   --font-primary: 'Noto Sans', sans-serif;

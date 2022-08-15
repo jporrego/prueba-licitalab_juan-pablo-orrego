@@ -18,25 +18,25 @@ const initialState: taskState = {
   tasks: [
     {
       _id: "1",
-      description: "Buy groceries.",
+      description: "Comprar comida para el perro",
       creationDate: new Date(new Date().getTime() - 520000000),
       dueDate: new Date(new Date().getTime() + 1200000000),
     },
     {
       _id: "2",
-      description: "Water plants",
+      description: "LLamar a papá",
       creationDate: new Date(new Date().getTime() - 250000000),
       dueDate: new Date(new Date().getTime() - 120000000),
     },
     {
       _id: "3",
-      description: "Water plants",
+      description: "Juntarse en el bar con el grupo de la universidad",
       creationDate: new Date(new Date().getTime() - 200000000),
       dueDate: new Date(new Date()),
     },
     {
       _id: "4",
-      description: "Water plants",
+      description: "Pagar las cuentas de la casa",
       creationDate: new Date(new Date().getTime() - 10000000),
       dueDate: new Date(new Date().getTime() + 1200000000),
     },
