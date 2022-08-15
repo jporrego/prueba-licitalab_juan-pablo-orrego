@@ -2,6 +2,7 @@ import {
   createAsyncThunk,
   createSlice,
   createEntityAdapter,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
 import { Task } from "../../types";
@@ -17,28 +18,29 @@ interface taskState {
 const initialState: taskState = {
   tasks: [
     {
-      _id: "1",
-      description: "Comprar comida para el perro",
-      creationDate: new Date(new Date().getTime() - 520000000),
-      dueDate: new Date(new Date().getTime() + 1200000000),
-    },
-    {
       _id: "2",
       description: "LLamar a papá",
       creationDate: new Date(new Date().getTime() - 250000000),
       dueDate: new Date(new Date().getTime() - 120000000),
     },
     {
-      _id: "3",
-      description: "Juntarse en el bar con el grupo de la universidad",
-      creationDate: new Date(new Date().getTime() - 200000000),
-      dueDate: new Date(new Date()),
-    },
-    {
       _id: "4",
       description: "Pagar las cuentas de la casa",
       creationDate: new Date(new Date().getTime() - 10000000),
       dueDate: new Date(new Date().getTime() + 1200000000),
+    },
+    {
+      _id: "1",
+      description: "Comprar comida para el perro",
+      creationDate: new Date(new Date().getTime() - 520000000),
+      dueDate: new Date(new Date().getTime() + 1200000000),
+    },
+
+    {
+      _id: "3",
+      description: "Juntarse en el bar con el grupo de la universidad",
+      creationDate: new Date(new Date().getTime() - 200000000),
+      dueDate: new Date(new Date()),
     },
   ],
   status: "idle",
@@ -56,7 +58,25 @@ export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    sortByCreationDate: (state) => {
+      state.tasks = state.tasks.sort(
+        (task1, task2) =>
+          Number(task1.creationDate) - Number(task2.creationDate)
+      );
+    },
+    sortByDueDate: (state) => {
+      state.tasks = state.tasks.sort(
+        (task1, task2) => Number(task1.dueDate) - Number(task2.dueDate)
+      );
+    },
+    sortByState: (state) => {
+      state.tasks = state.tasks.sort(
+        (task1, task2) =>
+          Number(task1.creationDate) - Number(task2.creationDate)
+      );
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchTasks.pending, (state, action) => {
@@ -73,7 +93,7 @@ const tasksSlice = createSlice({
   },
 });
 
-export const {} = tasksSlice.actions;
+export const { sortByCreationDate, sortByDueDate } = tasksSlice.actions;
 
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 
