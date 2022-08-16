@@ -4,6 +4,7 @@ import {
   createEntityAdapter,
   PayloadAction,
 } from "@reduxjs/toolkit";
+import compareAsc from "date-fns/compareAsc";
 import { RootState, AppThunk } from "../../app/store";
 import { Task, Filters } from "../../types";
 
@@ -96,11 +97,25 @@ export const { sortByCreationDate, sortByDueDate, sortByState } =
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 
 export const selectFilteredTasks = (state: RootState) => {
-  let filteredTasks: Task[] = [];
+  const filters = state.filters.filters;
 
-  filteredTasks = state.tasks.tasks.filter((task) =>
-    task.description.toLowerCase().includes(state.filters.filters.content)
+  let filteredTasks = [...state.tasks.tasks];
+
+  // Aplly text content filter
+  filteredTasks = filteredTasks.filter((task) =>
+    task.description.toLowerCase().includes(filters.content)
   );
+
+  //
+  if (filters.taskState.length > 0) {
+    filters.taskState.forEach((state) => {
+      if (state === "freed") {
+        filteredTasks = filteredTasks.filter(
+          (task) => compareAsc(new Date(), task.dueDate) === 1
+        );
+      }
+    });
+  }
 
   return filteredTasks;
 };
