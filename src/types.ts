@@ -7,6 +7,6 @@ export interface Task {
 
 export interface Filters {
   content: string;
-  dateRange: [Date, Date] | null;
-  taskState: ["freed" | "expired" | "pending"] | null;
+  dateRange: Date[];
+  taskState: string[];
 }

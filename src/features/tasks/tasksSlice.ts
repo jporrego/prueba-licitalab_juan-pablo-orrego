@@ -97,11 +97,11 @@ export const selectTasks = (state: RootState) => state.tasks.tasks;
 
 export const selectFilteredTasks = (state: RootState) => {
   let filteredTasks: Task[] = [];
-  if (state.filters.filters.content !== null) {
-    filteredTasks = state.tasks.tasks.filter((task) =>
-      task.description.toLowerCase().includes(state.filters.filters.content)
-    );
-  }
+
+  filteredTasks = state.tasks.tasks.filter((task) =>
+    task.description.toLowerCase().includes(state.filters.filters.content)
+  );
+
   return filteredTasks;
 };
 

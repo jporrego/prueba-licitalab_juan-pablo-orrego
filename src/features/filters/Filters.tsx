@@ -13,13 +13,26 @@ const Filters = () => {
   const [showFilters, setShowFilters] = useState(true);
   const [filters, setFilters] = useState<FiltersType>({
     content: "",
-    dateRange: null,
-    taskState: null,
+    dateRange: [],
+    taskState: [],
   });
 
   useEffect(() => {
     handleFilterChange();
   }, [filters]);
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let taskStateFilters = [...filters.taskState];
+    if (e.target.checked) {
+      taskStateFilters.push(e.target.value);
+    } else if (taskStateFilters.includes(e.target.value)) {
+      taskStateFilters = taskStateFilters.filter(
+        (state) => state !== e.target.value
+      );
+    }
+
+    setFilters({ ...filters, taskState: taskStateFilters });
+  };
 
   const handleFilterChange = (): void => {
     dispatch(updateFilters(filters));
@@ -42,18 +55,30 @@ const Filters = () => {
             />
           </div>
           <div>
-            <label htmlFor="estado">Estado</label>
-            <select
-              name="estado"
-              id="estado"
-              onChange={(e) => 1}
-              defaultValue="Todos"
-            >
-              <option value="todos">Todos</option>
-              <option value="liberada">Liberada</option>
-              <option value="pendiente">Pendiente</option>
-              <option value="atrasada">Estado</option>
-            </select>
+            <label htmlFor="freed">Liberada </label>
+            <input
+              type="checkbox"
+              id="freed"
+              name="freed"
+              value="freed"
+              onChange={(e) => handleCheckboxChange(e)}
+            />
+            <label htmlFor="expired">Atrasada </label>
+            <input
+              type="checkbox"
+              id="expired"
+              name="expired"
+              value="expired"
+              onChange={(e) => handleCheckboxChange(e)}
+            />
+            <label htmlFor="pending">Pendiente </label>
+            <input
+              type="checkbox"
+              id="pending"
+              name="pending"
+              value="pending"
+              onChange={(e) => handleCheckboxChange(e)}
+            />
           </div>
         </div>
       )}
