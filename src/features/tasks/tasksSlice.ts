@@ -95,8 +95,14 @@ export const { sortByCreationDate, sortByDueDate, sortByState } =
 
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 
-export const selectFilteredTasks = (state: RootState, filters: Filters) => {
-  return state.tasks.tasks;
+export const selectFilteredTasks = (state: RootState) => {
+  let filteredTasks: Task[] = [];
+  if (state.filters.filters.content !== null) {
+    filteredTasks = state.tasks.tasks.filter((task) =>
+      task.description.toLowerCase().includes(state.filters.filters.content)
+    );
+  }
+  return filteredTasks;
 };
 
 export default tasksSlice.reducer;

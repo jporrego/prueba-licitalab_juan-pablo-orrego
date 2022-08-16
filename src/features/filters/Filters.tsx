@@ -1,30 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { updateFilters } from "./filtersSlice";
+
 import { Filters as FiltersType } from "../../types";
 import { FaFilter } from "react-icons/fa";
 import styles from "./Filter.module.css";
 
 const Filters = () => {
+  const dispatch = useAppDispatch();
+
   const [showFilters, setShowFilters] = useState(true);
   const [filters, setFilters] = useState<FiltersType>({
-    content: null,
+    content: "",
     dateRange: null,
     taskState: null,
   });
-  const [textFilter, setTextFilter] = useState("");
-  const [dateRangeFilter, setDateRangeFilter] = useState([]);
-  const [stateFilter, setStateFilter] = useState([]);
 
-  function handleOrderChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-    throw new Error("Function not implemented.");
-  }
+  useEffect(() => {
+    handleFilterChange();
+  }, [filters]);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e.target.id);
-    if (e.target.id === "content") {
-      setFilters({ ...filters, content: e.target.value });
-    }
+  const handleFilterChange = (): void => {
+    dispatch(updateFilters(filters));
   };
 
   return (
@@ -38,7 +36,9 @@ const Filters = () => {
               type="text"
               name="content"
               id="content"
-              onChange={(e) => handleFilterChange(e)}
+              onChange={(e) =>
+                setFilters({ ...filters, content: e.target.value })
+              }
             />
           </div>
           <div>
@@ -46,7 +46,7 @@ const Filters = () => {
             <select
               name="estado"
               id="estado"
-              onChange={(e) => handleOrderChange(e)}
+              onChange={(e) => 1}
               defaultValue="Todos"
             >
               <option value="todos">Todos</option>

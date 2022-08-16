@@ -11,7 +11,7 @@ interface filterState {
   filters: FiltersType;
 }
 const initialState: filterState = {
-  filters: { content: null, dateRange: null, taskState: null },
+  filters: { content: "", dateRange: null, taskState: null },
 };
 
 const filtersSlice = createSlice({
