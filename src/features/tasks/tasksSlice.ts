@@ -109,7 +109,7 @@ export const selectFilteredTasks = (state: RootState) => {
   //
   if (filters.taskState.length > 0) {
     filters.taskState.forEach((state) => {
-      if (state === "freed") {
+      if (state === "expired") {
         filteredTasks = filteredTasks.filter(
           (task) => compareAsc(new Date(), task.dueDate) === 1
         );

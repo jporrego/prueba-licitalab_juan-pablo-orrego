@@ -11,9 +11,9 @@ function App() {
   return (
     <div className={styles.app}>
       <Header></Header>
-      <div>
-        <Order></Order>
+      <div className={styles.filter_order}>
         <Filters></Filters>
+        <Order></Order>
       </div>
       <TasksList></TasksList>
     </div>

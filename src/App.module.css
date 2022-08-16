@@ -1,9 +1,15 @@
 .app {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
   padding: 1rem;
   max-width: 50rem;
   min-height: 100vh;
   margin: 0 auto;
+}
+
+.filter_order {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }

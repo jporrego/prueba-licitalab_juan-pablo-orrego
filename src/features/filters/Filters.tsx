@@ -5,7 +5,7 @@ import { updateFilters } from "./filtersSlice";
 
 import { Filters as FiltersType } from "../../types";
 import { FaFilter } from "react-icons/fa";
-import styles from "./Filter.module.css";
+import styles from "./Filters.module.css";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +40,10 @@ const Filters = () => {
 
   return (
     <div className={styles.filter}>
-      <FaFilter onClick={() => setShowFilters(!showFilters)}></FaFilter>
+      <FaFilter
+        onClick={() => setShowFilters(!showFilters)}
+        className={styles.filterBtnOpen}
+      ></FaFilter>
       {showFilters && (
         <div className={styles.filters_popup}>
           <div>
