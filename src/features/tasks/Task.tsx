@@ -10,25 +10,38 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ task }) => {
-  const [dateState, setDateState] = useState<
+  const [dateState, setDateState] = useState<"freed" | "pending" | "expired">();
+  const [timeToDueDate, setTimeToDueDate] = useState<
     "onTime" | "almostExpired" | "expired"
   >();
+  // Add a new state to keep track of pendiente, atrasada, liberada
+
   useEffect(() => {
     calculateDateState();
+    calculateTimeToDueDate();
   }, []);
 
   const calculateDateState = () => {
     // First check if the task is expired or not and set the apropiate state.
     // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
-
-    if (compareAsc(task.dueDate, new Date()) === -1) {
+    if (compareAsc(new Date(), task.dueDate) === 1) {
       setDateState("expired");
     } else {
-      setDateState("onTime");
+      setDateState("pending");
+    }
+  };
+  const calculateTimeToDueDate = () => {
+    // First check if the task is expired or not and set the apropiate state.
+    // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
+
+    if (compareAsc(task.dueDate, new Date()) === -1) {
+      setTimeToDueDate("expired");
+    } else {
+      setTimeToDueDate("onTime");
     }
 
     if (format(task.dueDate, "dd") === format(new Date(), "dd")) {
-      setDateState("almostExpired");
+      setTimeToDueDate("almostExpired");
     }
   };
 
@@ -58,10 +71,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         </div>
       </div>
 
-      <DateStateIcon
-        dateState={dateState}
-        setDateState={setDateState}
-      ></DateStateIcon>
+      <DateStateIcon timeToDueDate={timeToDueDate}></DateStateIcon>
     </div>
   );
 };

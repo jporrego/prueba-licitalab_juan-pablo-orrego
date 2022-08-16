@@ -7,24 +7,18 @@ import {
 import styles from "../../features/tasks/Tasks.module.css";
 
 interface DateStateIcon {
-  dateState: string | undefined;
-  setDateState: React.Dispatch<
-    React.SetStateAction<"onTime" | "almostExpired" | "expired" | undefined>
-  >;
+  timeToDueDate: string | undefined;
 }
 
-const DateStateIcon: React.FC<DateStateIcon> = ({
-  dateState,
-  setDateState,
-}) => {
+const DateStateIcon: React.FC<DateStateIcon> = ({ timeToDueDate }) => {
   const stateIcon = () => {
-    if (dateState === "onTime") {
+    if (timeToDueDate === "onTime") {
       return (
         <div className={styles.stateIcon__onTime}>
           <BsFillCheckCircleFill></BsFillCheckCircleFill>
         </div>
       );
-    } else if (dateState === "almostExpired") {
+    } else if (timeToDueDate === "almostExpired") {
       return (
         <div className={styles.stateIcon__almostExpired}>
           <BsFillClockFill></BsFillClockFill>
