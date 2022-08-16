@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { updateFilters } from "./filtersSlice";
+import { updateFilters, selectFilters } from "./filtersSlice";
 
 import { Filters as FiltersType } from "../../types";
 import { FaFilter } from "react-icons/fa";
@@ -9,10 +9,10 @@ import styles from "./Filters.module.css";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
-
+  const initialState = useAppSelector(selectFilters);
   const [showFilters, setShowFilters] = useState(true);
   const [filters, setFilters] = useState<FiltersType>({
-    content: "",
+    content: initialState.content,
     dateRange: [],
     taskState: [],
   });
@@ -45,43 +45,51 @@ const Filters = () => {
         className={styles.filterBtnOpen}
       ></FaFilter>
       {showFilters && (
-        <div className={styles.filters_popup}>
+        <div className={styles.filters_popup} id="filters_popup">
           <div>
-            <label htmlFor="content">Contenido </label>
             <input
               type="text"
               name="content"
               id="content"
+              placeholder="Contenido"
+              value={filters.content}
               onChange={(e) =>
                 setFilters({ ...filters, content: e.target.value })
               }
             />
           </div>
-          <div>
-            <label htmlFor="freed">Liberada </label>
-            <input
-              type="checkbox"
-              id="freed"
-              name="freed"
-              value="freed"
-              onChange={(e) => handleCheckboxChange(e)}
-            />
-            <label htmlFor="expired">Atrasada </label>
-            <input
-              type="checkbox"
-              id="expired"
-              name="expired"
-              value="expired"
-              onChange={(e) => handleCheckboxChange(e)}
-            />
-            <label htmlFor="pending">Pendiente </label>
-            <input
-              type="checkbox"
-              id="pending"
-              name="pending"
-              value="pending"
-              onChange={(e) => handleCheckboxChange(e)}
-            />
+
+          <div className={styles.filters_state}>
+            <div>
+              <input
+                type="checkbox"
+                id="freed"
+                name="freed"
+                value="freed"
+                onChange={(e) => handleCheckboxChange(e)}
+              />
+              <label htmlFor="freed">Liberada </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="expired"
+                name="expired"
+                value="expired"
+                onChange={(e) => handleCheckboxChange(e)}
+              />
+              <label htmlFor="expired">Atrasada </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="pending"
+                name="pending"
+                value="pending"
+                onChange={(e) => handleCheckboxChange(e)}
+              />
+              <label htmlFor="pending">Pendiente </label>
+            </div>
           </div>
         </div>
       )}

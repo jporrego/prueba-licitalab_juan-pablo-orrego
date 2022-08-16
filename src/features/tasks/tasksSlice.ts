@@ -21,18 +21,21 @@ const initialState: taskState = {
       description: "Llamar a papá",
       creationDate: new Date(new Date().getTime() - 250000000),
       dueDate: new Date(new Date().getTime() - 120000000),
+      done: false,
     },
     {
       _id: "4",
       description: "Pagar las cuentas de la casa",
       creationDate: new Date(new Date().getTime() - 810000000),
       dueDate: new Date(new Date().getTime() + 200000000),
+      done: false,
     },
     {
       _id: "1",
       description: "Comprar comida para el perro",
       creationDate: new Date(new Date().getTime() - 520000000),
       dueDate: new Date(new Date().getTime() + 2100000000),
+      done: true,
     },
 
     {
@@ -40,6 +43,7 @@ const initialState: taskState = {
       description: "Juntarse en el bar con el grupo de la universidad",
       creationDate: new Date(new Date().getTime() - 500000000),
       dueDate: new Date(new Date().getTime() + 1000000),
+      done: false,
     },
   ],
   status: "idle",
@@ -97,25 +101,33 @@ export const { sortByCreationDate, sortByDueDate, sortByState } =
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 
 export const selectFilteredTasks = (state: RootState) => {
+  const tasks = [...state.tasks.tasks];
   const filters = state.filters.filters;
 
-  let filteredTasks = [...state.tasks.tasks];
+  let filteredTasks: Task[] = [];
+
+  // Filter the tasks that match the states and add them to the filtered array.
+  if (filters.taskState.length > 0) {
+    filters.taskState.forEach((state) => {
+      if (state === "expired") {
+        filteredTasks = filteredTasks.concat(
+          tasks.filter((task) => compareAsc(new Date(), task.dueDate) === 1)
+        );
+      }
+      if (state === "pending") {
+        filteredTasks = filteredTasks.concat(
+          tasks.filter((task) => compareAsc(new Date(), task.dueDate) !== 1)
+        );
+      }
+    });
+  } else {
+    filteredTasks = tasks;
+  }
 
   // Aplly text content filter
   filteredTasks = filteredTasks.filter((task) =>
     task.description.toLowerCase().includes(filters.content)
   );
-
-  //
-  if (filters.taskState.length > 0) {
-    filters.taskState.forEach((state) => {
-      if (state === "expired") {
-        filteredTasks = filteredTasks.filter(
-          (task) => compareAsc(new Date(), task.dueDate) === 1
-        );
-      }
-    });
-  }
 
   return filteredTasks;
 };

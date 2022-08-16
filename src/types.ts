@@ -3,6 +3,7 @@ export interface Task {
   description: string;
   creationDate: Date;
   dueDate: Date;
+  done: boolean;
 }
 
 export interface Filters {
