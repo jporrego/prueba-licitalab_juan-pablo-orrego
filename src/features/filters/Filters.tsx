@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { updateFilters } from "./filtersSlice";
-import { Filters } from "../../types";
+import { Filters as FiltersType } from "../../types";
 import { FaFilter } from "react-icons/fa";
 import styles from "./Filter.module.css";
 
 const Filters = () => {
   const [showFilters, setShowFilters] = useState(true);
+  const [filters, setFilters] = useState<FiltersType>({
+    content: null,
+    dateRange: null,
+    taskState: null,
+  });
   const [textFilter, setTextFilter] = useState("");
   const [dateRangeFilter, setDateRangeFilter] = useState([]);
   const [stateFilter, setStateFilter] = useState([]);
@@ -16,7 +21,10 @@ const Filters = () => {
   }
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e.target.value);
+    console.log(e.target.id);
+    if (e.target.id === "content") {
+      setFilters({ ...filters, content: e.target.value });
+    }
   };
 
   return (

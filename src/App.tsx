@@ -5,7 +5,7 @@ import Header from "./components/header/Header";
 import TasksList from "./features/tasks/TasksList";
 import styles from "./App.module.css";
 import Order from "./components/order/Order";
-import Filter from "./components/filter/Filter";
+import Filters from "./features/filters/Filters";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Header></Header>
       <div>
         <Order></Order>
-        <Filter></Filter>
+        <Filters></Filters>
       </div>
       <TasksList></TasksList>
     </div>

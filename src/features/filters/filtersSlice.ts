@@ -5,20 +5,22 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
-import { Filters } from "../../types";
+import { Filters as FiltersType } from "../../types";
 
 interface filterState {
-  filters: Filters;
+  filters: FiltersType;
 }
-const initialState = {
-  filters: {},
+const initialState: filterState = {
+  filters: { content: null, dateRange: null, taskState: null },
 };
 
 const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    updateFilters: (state, action: PayloadAction<number>) => {},
+    updateFilters: (state, action: PayloadAction<FiltersType>) => {
+      state.filters = action.payload;
+    },
   },
 });
 
