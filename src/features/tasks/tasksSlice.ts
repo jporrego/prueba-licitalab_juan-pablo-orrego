@@ -5,9 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
-import { Task } from "../../types";
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
-var add = require("date-fns/add");
+import { Task, Filters } from "../../types";
 
 interface taskState {
   tasks: Task[];
@@ -96,5 +94,9 @@ export const { sortByCreationDate, sortByDueDate, sortByState } =
   tasksSlice.actions;
 
 export const selectTasks = (state: RootState) => state.tasks.tasks;
+
+export const selectFilteredTasks = (state: RootState, filters: Filters) => {
+  return state.tasks.tasks;
+};
 
 export default tasksSlice.reducer;

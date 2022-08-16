@@ -4,3 +4,9 @@ export interface Task {
   creationDate: Date;
   dueDate: Date;
 }
+
+export interface Filters {
+  content: string | null;
+  dateRange: [Date, Date] | null;
+  taskState: ["freed" | "expired" | "pending"] | null;
+}

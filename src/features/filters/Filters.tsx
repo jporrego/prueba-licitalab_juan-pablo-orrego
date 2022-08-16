@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { updateFilters } from "./filtersSlice";
+import { Filters } from "../../types";
 import { FaFilter } from "react-icons/fa";
 import styles from "./Filter.module.css";
 
-const Filter = () => {
+const Filters = () => {
   const [showFilters, setShowFilters] = useState(true);
   const [textFilter, setTextFilter] = useState("");
   const [dateRangeFilter, setDateRangeFilter] = useState([]);
@@ -12,7 +15,7 @@ const Filter = () => {
     throw new Error("Function not implemented.");
   }
 
-  const handleFilterByText = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     console.log(e.target.value);
   };
 
@@ -27,7 +30,7 @@ const Filter = () => {
               type="text"
               name="content"
               id="content"
-              onChange={(e) => handleFilterByText(e)}
+              onChange={(e) => handleFilterChange(e)}
             />
           </div>
           <div>
@@ -50,4 +53,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default Filters;
