@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { format, formatDistanceToNow, compareAsc, compareDesc } from "date-fns";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { setSelectedTasks } from "../../features/tasks/tasksSlice";
 import { Task as TaskType } from "../../types";
-import styles from "./Tasks.module.css";
+import { format, formatDistanceToNow, compareAsc, compareDesc } from "date-fns";
 import { es as esLocale } from "date-fns/locale";
 import DateStateIcon from "../../components/date_state_icon/DateStateIcon";
+import styles from "./Tasks.module.css";
 
 interface TaskProps {
   task: TaskType;
 }
 
 const Task: React.FC<TaskProps> = ({ task }) => {
+  const dispatch = useAppDispatch();
+
   const [dateState, setDateState] = useState<"freed" | "pending" | "expired">();
   const [timeToDueDate, setTimeToDueDate] = useState<
     "onTime" | "almostExpired" | "expired"
@@ -62,7 +66,12 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   return (
     <div className={`${taskBgStyle()} ${styles.task}`}>
-      <input type="checkbox" />
+      <input
+        onChange={(e) =>
+          dispatch(setSelectedTasks([task._id, e.target.checked]))
+        }
+        type="checkbox"
+      />
       <div className={styles.description}>
         <div className={styles.creation_date}>
           {`Tarea creada hace ${formatDistanceToNow(

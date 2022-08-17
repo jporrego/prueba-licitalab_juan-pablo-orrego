@@ -8,9 +8,14 @@
   margin: 0 auto;
 }
 
-.filter_order {
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters_order {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 1rem;
 }

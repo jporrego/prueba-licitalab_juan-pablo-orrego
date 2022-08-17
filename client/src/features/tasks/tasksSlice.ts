@@ -10,6 +10,7 @@ import { Task, Filters } from "../../types";
 
 interface taskState {
   tasks: Task[];
+  selectedTasks: string[];
   order: string;
   status: "idle" | "loading" | "failed" | "succeeded";
   error: string | undefined;
@@ -17,6 +18,7 @@ interface taskState {
 
 const initialState: taskState = {
   tasks: [],
+  selectedTasks: [],
   order: "creationDate",
   status: "idle",
   error: "",
@@ -58,6 +60,18 @@ const tasksSlice = createSlice({
       );
       state.order = "state";
     },
+    setSelectedTasks: (state, action: PayloadAction<[string, boolean]>) => {
+      const taskId = action.payload[0];
+      const checked = action.payload[1];
+
+      if (checked && !state.selectedTasks.includes(taskId)) {
+        state.selectedTasks.push(taskId);
+      } else if (!checked && state.selectedTasks.includes(taskId)) {
+        state.selectedTasks = state.selectedTasks.filter(
+          (id) => id !== action.payload[0]
+        );
+      }
+    },
   },
   extraReducers(builder) {
     builder
@@ -75,8 +89,12 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { sortByCreationDate, sortByDueDate, sortByState } =
-  tasksSlice.actions;
+export const {
+  sortByCreationDate,
+  sortByDueDate,
+  sortByState,
+  setSelectedTasks,
+} = tasksSlice.actions;
 
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 
@@ -112,6 +130,8 @@ export const selectFilteredTasks = (state: RootState) => {
   return filteredTasks;
 };
 
+export const selectSelectedTasks = (state: RootState) =>
+  state.tasks.selectedTasks;
 export const selectTasksStatus = (state: RootState) => state.tasks.status;
 export const selectTasksOrder = (state: RootState) => state.tasks.order;
 

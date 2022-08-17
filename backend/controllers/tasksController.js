@@ -51,3 +51,12 @@ exports.task_edit = async function (req, res, next) {
     return next(error);
   }
 };
+
+exports.task_set_done = async function (req, res, next) {
+  try {
+    await Item.findOneAndUpdate({ _id: req.params.id }, { done: true });
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
