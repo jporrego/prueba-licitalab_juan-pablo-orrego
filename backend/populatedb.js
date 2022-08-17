@@ -18,7 +18,7 @@ const dropCollections = async (cb) => {
 function taskCreate(description, creationDate, dueDate, done, cb) {
   var task = new Task({
     description: description,
-    creationDate: new Date(),
+    creationDate: creationDate,
     dueDate: dueDate,
     done: done,
   });
@@ -68,6 +68,15 @@ function createTasks(cb) {
           "Pagar las cuentas de la casa",
           new Date("2022, 08, 09"),
           new Date("2022, 08, 24"),
+          false,
+          callback
+        );
+      },
+      function (callback) {
+        taskCreate(
+          "Arreglar puerta",
+          new Date("2022, 08, 10"),
+          new Date("2022, 08, 15"),
           false,
           callback
         );
