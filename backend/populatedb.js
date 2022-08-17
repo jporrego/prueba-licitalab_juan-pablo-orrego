@@ -15,7 +15,7 @@ const dropCollections = async (cb) => {
   await db.dropCollection("tasks");
 };
 
-function taskCreate(description, dueDate, done, cb) {
+function taskCreate(description, creationDate, dueDate, done, cb) {
   var task = new Task({
     description: description,
     creationDate: new Date(),
@@ -37,7 +37,40 @@ function createTasks(cb) {
   async.series(
     [
       function (callback) {
-        taskCreate("Llamar a papá", new Date("25-08-2022"), false, callback);
+        taskCreate(
+          "Llamar a papá",
+          new Date("2022, 08, 15"),
+          new Date("2022, 08, 25"),
+          false,
+          callback
+        );
+      },
+      function (callback) {
+        taskCreate(
+          "Juntarse en el bar con el grupo de la universidad",
+          new Date("2022, 08, 12"),
+          new Date(),
+          false,
+          callback
+        );
+      },
+      function (callback) {
+        taskCreate(
+          "Comprar plantas",
+          new Date("2022, 08, 11"),
+          new Date("2022, 09, 10"),
+          false,
+          callback
+        );
+      },
+      function (callback) {
+        taskCreate(
+          "Pagar las cuentas de la casa",
+          new Date("2022, 08, 09"),
+          new Date("2022, 08, 24"),
+          false,
+          callback
+        );
       },
     ],
     // optional callback
