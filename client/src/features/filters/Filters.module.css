@@ -1,6 +1,7 @@
 .filter {
     position: relative;
     width: fit-content;
+    z-index: 10;
 }
 
 .filterBtnOpen {
@@ -21,8 +22,6 @@
     font-size: 1.2rem;
 }
 
-
-
 .filters_state div {
     display: flex;
     gap: 1rem;
@@ -33,4 +32,9 @@
 
 .filterBtnOpen:hover {
     transform: translateY(-1px)
+}
+
+.button {
+    background-color: transparent;
+    box-shadow: none;
 }

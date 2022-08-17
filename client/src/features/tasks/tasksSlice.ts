@@ -126,7 +126,7 @@ export const selectFilteredTasks = (state: RootState) => {
 
   // Aplly text content filter
   filteredTasks = filteredTasks.filter((task) =>
-    task.description.toLowerCase().includes(filters.content)
+    task.description.toLowerCase().includes(filters.content.toLowerCase())
   );
 
   return filteredTasks;
