@@ -4,14 +4,23 @@ import {
   sortByCreationDate,
   sortByDueDate,
   sortByState,
+  selectTasksOrder,
+  selectTasks,
 } from "../../features/tasks/tasksSlice";
 import Popup from "reactjs-popup";
 import styles from "./Order.module.css";
 
 const Order = () => {
   const dispatch = useAppDispatch();
+  const order = useAppSelector(selectTasksOrder);
+  const tasks = useAppSelector(selectTasks);
+
   useEffect(() => {
-    dispatch(sortByCreationDate());
+    // Pienso que usar setTimeout para ordenar las tarjetas despues de que cargan no es buena idea.
+    // Podria poner las tareas en el dependecy array de useEffect, pero por como programe las funciones para ordenar
+    // estaria llamando el orden por defecto 'sortByCreationDate' cada vez que cambio el orden, por lo que siempre seria el mismo.
+    // Con mas tiempo trataria de encontrar otra forma de hacerlo.
+    setTimeout(() => dispatch(sortByCreationDate()), 150);
   }, []);
 
   function handleOrderChange(e: React.ChangeEvent<HTMLSelectElement>): void {
@@ -34,7 +43,7 @@ const Order = () => {
           name="order"
           id="order"
           onChange={(e) => handleOrderChange(e)}
-          defaultValue="creationDate"
+          defaultValue={order}
         >
           <option value="creationDate">Fecha de creación</option>
           <option value="dueDate">Fecha de vencimiento</option>

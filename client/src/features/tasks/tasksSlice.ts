@@ -10,51 +10,25 @@ import { Task, Filters } from "../../types";
 
 interface taskState {
   tasks: Task[];
+  order: string;
   status: "idle" | "loading" | "failed" | "succeeded";
   error: string | undefined;
 }
 
 const initialState: taskState = {
-  tasks: [
-    {
-      _id: "2",
-      description: "Llamar a papá",
-      creationDate: new Date(new Date().getTime() - 250000000),
-      dueDate: new Date(new Date().getTime() - 120000000),
-      done: false,
-    },
-    {
-      _id: "4",
-      description: "Pagar las cuentas de la casa",
-      creationDate: new Date(new Date().getTime() - 810000000),
-      dueDate: new Date(new Date().getTime() + 200000000),
-      done: false,
-    },
-    {
-      _id: "1",
-      description: "Comprar comida para el perro",
-      creationDate: new Date(new Date().getTime() - 520000000),
-      dueDate: new Date(new Date().getTime() + 2100000000),
-      done: false,
-    },
-
-    {
-      _id: "3",
-      description: "Juntarse en el bar con el grupo de la universidad",
-      creationDate: new Date(new Date().getTime() - 500000000),
-      dueDate: new Date(new Date().getTime() + 1000000),
-      done: false,
-    },
-  ],
+  tasks: [],
+  order: "creationDate",
   status: "idle",
   error: "",
 };
 
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  if (process.env.REACT_APP_API_URL !== undefined) {
-    const response = await fetch(process.env.REACT_APP_API_URL + "api/tasks");
+  try {
+    const response = await fetch("http://localhost:4050/");
     const data = response.json();
     return data;
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -65,18 +39,24 @@ const tasksSlice = createSlice({
     sortByCreationDate: (state) => {
       state.tasks = state.tasks.sort(
         (task1, task2) =>
-          Number(task2.creationDate) - Number(task1.creationDate)
+          Number(new Date(task2.creationDate)) -
+          Number(new Date(task1.creationDate))
       );
+      state.order = "creationDate";
     },
     sortByDueDate: (state) => {
       state.tasks = state.tasks.sort(
-        (task1, task2) => Number(task2.dueDate) - Number(task1.dueDate)
+        (task1, task2) =>
+          Number(new Date(task2.dueDate)) - Number(new Date(task1.dueDate))
       );
+      state.order = "dueDate";
     },
     sortByState: (state) => {
       state.tasks = state.tasks.sort(
-        (task1, task2) => Number(task1.dueDate) - Number(task2.dueDate)
+        (task1, task2) =>
+          Number(new Date(task1.dueDate)) - Number(new Date(task2.dueDate))
       );
+      state.order = "state";
     },
   },
   extraReducers(builder) {
@@ -90,7 +70,7 @@ const tasksSlice = createSlice({
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "action.error.message";
+        state.error = action.error.message;
       });
   },
 });
@@ -131,5 +111,8 @@ export const selectFilteredTasks = (state: RootState) => {
 
   return filteredTasks;
 };
+
+export const selectTasksStatus = (state: RootState) => state.tasks.status;
+export const selectTasksOrder = (state: RootState) => state.tasks.order;
 
 export default tasksSlice.reducer;

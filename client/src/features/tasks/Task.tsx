@@ -24,7 +24,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   const calculateDateState = () => {
     // First check if the task is expired or not and set the apropiate state.
     // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
-    if (compareAsc(new Date(), task.dueDate) === 1) {
+    if (compareAsc(new Date(), new Date(task.dueDate)) === 1) {
       setDateState("expired");
     } else {
       setDateState("pending");
@@ -35,13 +35,13 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     // First check if the task is expired or not and set the apropiate state.
     // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
 
-    if (compareAsc(task.dueDate, new Date()) === -1) {
+    if (compareAsc(new Date(task.dueDate), new Date()) === -1) {
       setTimeToDueDate("expired");
     } else {
       setTimeToDueDate("onTime");
     }
 
-    if (format(task.dueDate, "dd") === format(new Date(), "dd")) {
+    if (format(new Date(task.dueDate), "dd") === format(new Date(), "dd")) {
       setTimeToDueDate("almostExpired");
     }
   };
@@ -65,9 +65,12 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       <input type="checkbox" />
       <div className={styles.description}>
         <div className={styles.creation_date}>
-          {`Tarea creada hace ${formatDistanceToNow(task.creationDate, {
-            locale: esLocale,
-          })}`}
+          {`Tarea creada hace ${formatDistanceToNow(
+            new Date(task.creationDate),
+            {
+              locale: esLocale,
+            }
+          )}`}
         </div>
         {task.description}
       </div>
@@ -77,7 +80,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           <div>Vencimiento: </div>
           <input
             type="date"
-            value={format(task.dueDate, "yyyy-MM-dd")}
+            value={format(new Date(task.dueDate), "yyyy-MM-dd")}
             onChange={(e) => handleDateChange(e)}
           ></input>
         </div>
