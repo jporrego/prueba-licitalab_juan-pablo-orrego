@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { setSelectedTasks } from "../../features/tasks/tasksSlice";
+import {
+  setSelectedTasks,
+  selectTasks,
+  fetchTasks,
+  sortByState,
+} from "../../features/tasks/tasksSlice";
 import { Task as TaskType } from "../../types";
 import { format, formatDistanceToNow, compareAsc, compareDesc } from "date-fns";
 import { es as esLocale } from "date-fns/locale";
@@ -13,32 +19,27 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = ({ task }) => {
   const dispatch = useAppDispatch();
+  const tasks = useAppSelector(selectTasks);
 
-  const [dateState, setDateState] = useState<"freed" | "pending" | "expired">();
+  //const [dateState, setDateState] = useState<"freed" | "pending" | "expired">();
   const [timeToDueDate, setTimeToDueDate] = useState<
     "onTime" | "almostExpired" | "expired"
   >();
   // Add a new state to keep track of pendiente, atrasada, liberada
 
   useEffect(() => {
-    calculateDateState();
     calculateTimeToDueDate();
-  }, []);
-
+  }, [tasks]);
+  /*
   const calculateDateState = () => {
-    // First check if the task is expired or not and set the apropiate state.
-    // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
     if (compareAsc(new Date(), new Date(task.dueDate)) === 1) {
       setDateState("expired");
     } else {
       setDateState("pending");
     }
-  };
+  };*/
 
   const calculateTimeToDueDate = () => {
-    // First check if the task is expired or not and set the apropiate state.
-    // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
-
     if (compareAsc(new Date(task.dueDate), new Date()) === -1) {
       setTimeToDueDate("expired");
     } else {
@@ -50,8 +51,19 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     }
   };
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(new Date(e.target.value));
+  const handleDateChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const response = await axios.put("http://localhost:4050/" + task._id, {
+        date: e.target.value,
+      });
+      if (response.status === 200) {
+        await dispatch(fetchTasks());
+        dispatch(sortByState());
+        calculateTimeToDueDate();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const taskBgStyle = () => {

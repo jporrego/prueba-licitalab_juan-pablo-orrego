@@ -12,7 +12,7 @@ router.get("/", tasks_controller.task_list);
 router.post("/create", tasks_controller.task_create);
 
 // PUT request to create task.
-router.put("/:id/edit", tasks_controller.task_edit);
+router.put("/:id", tasks_controller.task_edit);
 
 // POST request to delete category.
 router.put("/:id/done", tasks_controller.task_set_done);

@@ -34,27 +34,18 @@ exports.task_create = async function (req, res, next) {
 
 exports.task_edit = async function (req, res, next) {
   try {
-    const existingItems = await Item.find({
-      category: req.params.id,
-    }).exec();
-
-    if (existingItems.length > 0) {
-      //throw new Error("Can't delete this category because other documents reference it.");
-      res.status(409).json({
-        message: "Can't delete this category because other items reference it.",
-      });
-    } else {
-      await Category.deleteOne({ _id: req.params.id });
-      res.end();
-    }
+    await Task.findOneAndUpdate(
+      { _id: req.params.id },
+      { dueDate: new Date(req.body.date) }
+    );
+    res.sendStatus(200);
   } catch (error) {
-    return next(error);
+    res.sendStatus(500);
   }
 };
 
 exports.task_set_done = async function (req, res, next) {
   try {
-    console.log(req.body.tasks);
     req.body.tasks.forEach(async (task) => {
       await Task.findOneAndUpdate({ _id: task }, { done: true });
     });
