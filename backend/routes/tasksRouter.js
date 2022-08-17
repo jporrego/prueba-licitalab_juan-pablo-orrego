@@ -9,18 +9,12 @@ let tasks_controller = require("../controllers/tasksController");
 /// -------------------------- CATEGORY ROUTES -------------------------- ///
 
 // GET request for list of all categorys.
-router.get("/categories", category_controller.category_list);
+router.get("/", tasks_controller.task_list);
 
 // POST request for creating category.
-router.post("/category/create", category_controller.category_create_post);
-
-// GET request for one category by name.
-router.get("/category/name/:name", category_controller.category_detail_by_name);
+router.post("/create", tasks_controller.task_create);
 
 // POST request to delete category.
-router.post("/category/:id/delete", category_controller.category_delete_post);
-
-// GET request for one category by id.
-router.get("/category/:id", category_controller.category_detail);
+router.put("/:id/edit", tasks_controller.task_edit);
 
 module.exports = router;
