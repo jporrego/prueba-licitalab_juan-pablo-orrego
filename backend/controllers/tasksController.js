@@ -54,7 +54,10 @@ exports.task_edit = async function (req, res, next) {
 
 exports.task_set_done = async function (req, res, next) {
   try {
-    await Item.findOneAndUpdate({ _id: req.params.id }, { done: true });
+    console.log(req.body.tasks);
+    req.body.tasks.forEach(async (task) => {
+      await Task.findOneAndUpdate({ _id: task }, { done: true });
+    });
     res.sendStatus(200);
   } catch (error) {
     res.sendStatus(500);

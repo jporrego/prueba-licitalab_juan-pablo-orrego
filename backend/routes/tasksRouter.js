@@ -1,20 +1,20 @@
 let express = require("express");
 let router = express.Router();
 
-// Require controller modules.
 let tasks_controller = require("../controllers/tasksController");
 
-/// ITEM ROUTES ///
+/// -------------------------- TASK ROUTES -------------------------- ///
 
-/// -------------------------- CATEGORY ROUTES -------------------------- ///
-
-// GET request for list of all categorys.
+// GET request for list of all tasks.
 router.get("/", tasks_controller.task_list);
 
-// POST request for creating category.
+// POST request for creating task.
 router.post("/create", tasks_controller.task_create);
 
-// POST request to delete category.
+// PUT request to create task.
 router.put("/:id/edit", tasks_controller.task_edit);
+
+// POST request to delete category.
+router.put("/:id/done", tasks_controller.task_set_done);
 
 module.exports = router;
