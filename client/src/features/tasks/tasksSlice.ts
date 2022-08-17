@@ -54,10 +54,14 @@ const tasksSlice = createSlice({
       state.order = "dueDate";
     },
     sortByState: (state) => {
-      state.tasks = state.tasks.sort(
-        (task1, task2) =>
-          Number(new Date(task1.dueDate)) - Number(new Date(task2.dueDate))
-      );
+      const doneTasks = [...state.tasks].filter((task) => task.done);
+      state.tasks = state.tasks
+        .filter((task) => !task.done)
+        .sort(
+          (task1, task2) =>
+            Number(new Date(task1.dueDate)) - Number(new Date(task2.dueDate))
+        );
+      state.tasks = state.tasks.concat(doneTasks);
       state.order = "state";
     },
     setSelectedTasks: (state, action: PayloadAction<[string, boolean]>) => {

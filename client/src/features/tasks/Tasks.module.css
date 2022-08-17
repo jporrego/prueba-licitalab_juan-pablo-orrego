@@ -52,7 +52,7 @@
 }
 
 .bg_onTime {
-    border-left: 1rem solid var(--blue);
+    border-left: 1rem solid var(--green);
 
 }
 
@@ -62,6 +62,15 @@
 
 .bg_expired {
     border-left: 1rem solid var(--red);
+}
+
+.bg_done {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.bg_done svg, .bg_done .creation_date {
+    color: var(--white);
 }
 
 .stateIcon__done {

@@ -55,7 +55,9 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   };
 
   const taskBgStyle = () => {
-    if (timeToDueDate === "onTime" && !task.done) {
+    if (task.done) {
+      return styles.bg_done;
+    } else if (timeToDueDate === "onTime" && !task.done) {
       return styles.bg_onTime;
     } else if (timeToDueDate === "almostExpired" && !task.done) {
       return styles.bg_almostExpired;
@@ -66,12 +68,16 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   return (
     <div className={`${taskBgStyle()} ${styles.task}`}>
-      <input
-        onChange={(e) =>
-          dispatch(setSelectedTasks([task._id, e.target.checked]))
-        }
-        type="checkbox"
-      />
+      {!task.done ? (
+        <input
+          onChange={(e) =>
+            dispatch(setSelectedTasks([task._id, e.target.checked]))
+          }
+          type="checkbox"
+        />
+      ) : (
+        <span></span>
+      )}
       <div className={styles.description}>
         <div className={styles.creation_date}>
           {`Tarea creada hace ${formatDistanceToNow(
