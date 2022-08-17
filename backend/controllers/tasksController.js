@@ -36,7 +36,7 @@ exports.task_edit = async function (req, res, next) {
   try {
     await Task.findOneAndUpdate(
       { _id: req.params.id },
-      { dueDate: new Date(req.body.date) }
+      { dueDate: new Date(req.body.date + "T00:00:00") }
     );
     res.sendStatus(200);
   } catch (error) {
