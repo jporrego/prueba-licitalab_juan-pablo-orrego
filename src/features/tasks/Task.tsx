@@ -63,15 +63,16 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   return (
     <div className={`${taskBgStyle()} ${styles.task}`}>
       <input type="checkbox" />
-      <div className={styles.description}>{task.description}</div>
-
-      <div className={styles.dates}>
-        <div>
+      <div className={styles.description}>
+        <div className={styles.creation_date}>
           {`Tarea creada hace ${formatDistanceToNow(task.creationDate, {
             locale: esLocale,
           })}`}
         </div>
+        {task.description}
+      </div>
 
+      <div className={styles.dates}>
         <div className={styles.dueDate}>
           <div>Vencimiento: </div>
           <input

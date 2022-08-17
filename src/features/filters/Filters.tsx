@@ -10,7 +10,7 @@ import styles from "./Filters.module.css";
 const Filters = () => {
   const dispatch = useAppDispatch();
   const initialState = useAppSelector(selectFilters);
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FiltersType>({
     content: initialState.content,
     dateRange: [],

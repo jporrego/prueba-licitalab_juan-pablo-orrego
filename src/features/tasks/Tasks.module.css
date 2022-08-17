@@ -5,6 +5,7 @@
 }
 
 .task {
+    position: relative;
     display: grid;
     grid-template-columns: min-content 45% 30% 1fr;
     align-items: center;
@@ -35,6 +36,13 @@
     height: 100%;
 }
 
+.creation_date {
+    position: absolute;
+    right: 1rem;
+    color: var(--grey-dark);
+    font-weight: 400;
+}
+
 .dueDate {
     display: flex;
     flex-direction: column;
@@ -57,15 +65,15 @@
 }
 
 .stateIcon__done {
-    color: var(--black);
+    color: var(--blue);
 }
 
 .stateIcon__pending {
-    color: var(--black);
+    color: var(--grey-dark);
 }
 
 .stateIcon__expired {
-    color: var(--black);
+    color: var(--red);
 }
 
 input[type=date] {
@@ -100,7 +108,7 @@ svg {
         padding: 1rem;
         border-radius: .5rem;
         box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .dueDate {
