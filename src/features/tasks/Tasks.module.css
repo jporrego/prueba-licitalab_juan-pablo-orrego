@@ -43,16 +43,29 @@
     justify-content: start;
 }
 
-.stateIcon__onTime {
-    color: var(--blue);
+.bg_onTime {
+    border-left: 1rem solid var(--blue);
+
 }
 
-.stateIcon__almostExpired {
-    color: var(--yellow);
+.bg_almostExpired {
+    border-left: 1rem solid var(--yellow);
+}
+
+.bg_expired {
+    border-left: 1rem solid var(--red);
+}
+
+.stateIcon__done {
+    color: var(--black);
+}
+
+.stateIcon__pending {
+    color: var(--black);
 }
 
 .stateIcon__expired {
-    color: var(--red);
+    color: var(--black);
 }
 
 input[type=date] {

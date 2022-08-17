@@ -30,6 +30,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       setDateState("pending");
     }
   };
+
   const calculateTimeToDueDate = () => {
     // First check if the task is expired or not and set the apropiate state.
     // Then check if the dueDate is for the same day as the current day, and set state to almost expired if so.
@@ -49,8 +50,18 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     console.log(new Date(e.target.value));
   };
 
+  const taskBgStyle = () => {
+    if (timeToDueDate === "onTime" && !task.done) {
+      return styles.bg_onTime;
+    } else if (timeToDueDate === "almostExpired" && !task.done) {
+      return styles.bg_almostExpired;
+    } else if (timeToDueDate === "expired" && !task.done) {
+      return styles.bg_expired;
+    }
+  };
+
   return (
-    <div className={styles.task}>
+    <div className={`${taskBgStyle()} ${styles.task}`}>
       <input type="checkbox" />
       <div className={styles.description}>{task.description}</div>
 
@@ -71,7 +82,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         </div>
       </div>
 
-      <DateStateIcon timeToDueDate={timeToDueDate}></DateStateIcon>
+      <DateStateIcon task={task} timeToDueDate={timeToDueDate}></DateStateIcon>
     </div>
   );
 };

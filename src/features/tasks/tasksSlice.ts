@@ -35,7 +35,7 @@ const initialState: taskState = {
       description: "Comprar comida para el perro",
       creationDate: new Date(new Date().getTime() - 520000000),
       dueDate: new Date(new Date().getTime() + 2100000000),
-      done: true,
+      done: false,
     },
 
     {
