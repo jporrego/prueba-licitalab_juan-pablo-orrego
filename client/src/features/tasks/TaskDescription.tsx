@@ -64,7 +64,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = ({ task }) => {
       ) : (
         <div>
           <textarea
-            id="description"
+            id={styles.description}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>

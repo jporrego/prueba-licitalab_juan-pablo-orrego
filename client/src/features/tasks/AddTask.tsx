@@ -23,7 +23,7 @@ const AddTask = () => {
   return (
     <div className={styles.add_task}>
       {showForm ? (
-        <div>
+        <div className={styles.add_task__form}>
           <form onSubmit={(e) => handleSubmit(e)}>
             <textarea
               id="description"
@@ -32,16 +32,18 @@ const AddTask = () => {
               onChange={(e) => setDescription(e.target.value)}
               required
             ></textarea>
-            <label htmlFor="date">Fecha de vencimiento: </label>
-            <input
-              type="date"
-              name="date"
-              value={format(new Date(date), "yyyy-MM-dd")}
-              onChange={(e) => {
-                setDate(e.target.value + "T00:00:00");
-              }}
-              required
-            />
+            <div>
+              <label htmlFor="date">Vencimiento: </label>
+              <input
+                type="date"
+                name="date"
+                value={format(new Date(date), "yyyy-MM-dd")}
+                onChange={(e) => {
+                  setDate(e.target.value + "T00:00:00");
+                }}
+                required
+              />
+            </div>
             <button type="submit">Aceptar</button>
           </form>
         </div>
