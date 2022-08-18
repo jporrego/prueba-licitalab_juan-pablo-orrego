@@ -8,6 +8,9 @@ export interface Task {
 
 export interface Filters {
   content: string;
-  dateRange: Date[];
+  dateRange: {
+    startDate: string;
+    endDate: string;
+  };
   taskState: string[];
 }

@@ -86,7 +86,7 @@
     color: var(--white);
 }
 
-.bg_done svg, .bg_done .creation_date {
+.bg_done svg, .bg_done .creation_date, .bg_done .deleteTaskBtn {
     color: var(--white);
 }
 

@@ -7,6 +7,7 @@ import { Filters as FiltersType } from "../../types";
 import { FaFilter } from "react-icons/fa";
 import styles from "./Filters.module.css";
 import Popup from "reactjs-popup";
+import format from "date-fns/format";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ const Filters = () => {
   const initialState = useAppSelector(selectFilters);
   const [filters, setFilters] = useState<FiltersType>({
     content: initialState.content,
-    dateRange: [],
+    dateRange: initialState.dateRange,
     taskState: initialState.taskState,
   });
 
@@ -79,6 +80,16 @@ const Filters = () => {
     );
   };
 
+  const handleDateRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedFilters = JSON.parse(JSON.stringify(filters));
+    if (e.target.id === "startDate") {
+      updatedFilters.dateRange.startDate = e.target.value;
+    } else if (e.target.id === "endDate") {
+      updatedFilters.dateRange.endDate = e.target.value;
+    }
+    setFilters(updatedFilters);
+  };
+
   return (
     <div className={styles.filter}>
       <Popup
@@ -106,41 +117,25 @@ const Filters = () => {
           />
         </div>
 
-        <div className={styles.filters_state}>
-          {renderCheckboxes()}
-          {/*
-          <div>
-            <input
-              type="checkbox"
-              id="freed"
-              name="freed"
-              value="freed"
-              onChange={(e) => handleCheckboxChange(e)}
-            />
-            <label htmlFor="freed">Liberada </label>
-          </div>
+        <div className={styles.filters_state}>{renderCheckboxes()}</div>
 
+        <div>
           <div>
+            <label>Fecha inicio: </label>
             <input
-              type="checkbox"
-              id="expired"
-              name="expired"
-              value="expired"
-              onChange={(e) => handleCheckboxChange(e)}
+              type="date"
+              id="startDate"
+              onChange={(e) => handleDateRangeChange(e)}
             />
-            <label htmlFor="expired">Atrasada </label>
           </div>
-
           <div>
+            <label>Fecha termino: </label>
             <input
-              type="checkbox"
-              id="pending"
-              name="pending"
-              value="pending"
-              onChange={(e) => handleCheckboxChange(e)}
+              type="date"
+              id="endDate"
+              onChange={(e) => handleDateRangeChange(e)}
             />
-            <label htmlFor="pending">Pendiente </label>
-          </div>*/}
+          </div>
         </div>
       </Popup>
     </div>

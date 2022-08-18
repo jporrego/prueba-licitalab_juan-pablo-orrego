@@ -6,7 +6,11 @@ interface filterState {
   filters: FiltersType;
 }
 const initialState: filterState = {
-  filters: { content: "", dateRange: [], taskState: [] },
+  filters: {
+    content: "",
+    dateRange: { startDate: "", endDate: "" },
+    taskState: [],
+  },
 };
 
 const filtersSlice = createSlice({
