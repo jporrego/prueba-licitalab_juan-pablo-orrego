@@ -10,7 +10,7 @@ En la carpeta 'backend' ejecutar el comando `npm i`. Una vez que terminen de ins
 
 ### Frontend (React/Typescript/Redux):
 
-En la carpeta 'cliente' ejecutar el comando `npm i`. Una vez que terminen de instalar los modulos, ejecutar `npm start` para correr la aplicacion en "http://localhost:3000" en el navegador.
+En la carpeta 'client' ejecutar el comando `npm i`. Una vez que terminen de instalar los modulos, ejecutar `npm start` para correr la aplicacion en "http://localhost:3000" en el navegador.
 
 ## Notas
 
