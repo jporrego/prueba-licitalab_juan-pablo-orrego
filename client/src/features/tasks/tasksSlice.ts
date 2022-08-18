@@ -64,6 +64,32 @@ const tasksSlice = createSlice({
       state.tasks = state.tasks.concat(doneTasks);
       state.order = "state";
     },
+    sortByCurrentOrder: (state) => {
+      if (state.order === "creationDate") {
+        state.tasks = state.tasks.sort(
+          (task1, task2) =>
+            Number(new Date(task2.creationDate)) -
+            Number(new Date(task1.creationDate))
+        );
+        state.order = "creationDate";
+      } else if (state.order === "dueDate") {
+        state.tasks = state.tasks.sort(
+          (task1, task2) =>
+            Number(new Date(task2.dueDate)) - Number(new Date(task1.dueDate))
+        );
+        state.order = "dueDate";
+      } else if (state.order === "state") {
+        const doneTasks = [...state.tasks].filter((task) => task.done);
+        state.tasks = state.tasks
+          .filter((task) => !task.done)
+          .sort(
+            (task1, task2) =>
+              Number(new Date(task1.dueDate)) - Number(new Date(task2.dueDate))
+          );
+        state.tasks = state.tasks.concat(doneTasks);
+        state.order = "state";
+      }
+    },
     setSelectedTasks: (state, action: PayloadAction<[string, boolean]>) => {
       const taskId = action.payload[0];
       const checked = action.payload[1];
@@ -97,6 +123,7 @@ export const {
   sortByCreationDate,
   sortByDueDate,
   sortByState,
+  sortByCurrentOrder,
   setSelectedTasks,
 } = tasksSlice.actions;
 

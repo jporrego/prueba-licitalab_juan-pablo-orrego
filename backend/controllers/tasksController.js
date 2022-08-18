@@ -32,7 +32,19 @@ exports.task_create = async function (req, res, next) {
   }
 };
 
-exports.task_edit = async function (req, res, next) {
+exports.task_edit_description = async function (req, res, next) {
+  try {
+    await Task.findOneAndUpdate(
+      { _id: req.params.id },
+      { description: req.body.description }
+    );
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
+exports.task_edit_date = async function (req, res, next) {
   try {
     await Task.findOneAndUpdate(
       { _id: req.params.id },

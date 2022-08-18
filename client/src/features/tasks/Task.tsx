@@ -6,12 +6,14 @@ import {
   selectTasks,
   fetchTasks,
   sortByState,
+  sortByDueDate,
 } from "../../features/tasks/tasksSlice";
 import { Task as TaskType } from "../../types";
 import { format, formatDistanceToNow, compareAsc, compareDesc } from "date-fns";
 import { es as esLocale } from "date-fns/locale";
 import DateStateIcon from "../../components/date_state_icon/DateStateIcon";
 import styles from "./Tasks.module.css";
+import TaskDescription from "./TaskDescription";
 
 interface TaskProps {
   task: TaskType;
@@ -21,23 +23,13 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector(selectTasks);
 
-  //const [dateState, setDateState] = useState<"freed" | "pending" | "expired">();
   const [timeToDueDate, setTimeToDueDate] = useState<
     "onTime" | "almostExpired" | "expired"
   >();
-  // Add a new state to keep track of pendiente, atrasada, liberada
 
   useEffect(() => {
     calculateTimeToDueDate();
   }, [tasks]);
-  /*
-  const calculateDateState = () => {
-    if (compareAsc(new Date(), new Date(task.dueDate)) === 1) {
-      setDateState("expired");
-    } else {
-      setDateState("pending");
-    }
-  };*/
 
   const calculateTimeToDueDate = () => {
     if (compareAsc(new Date(task.dueDate), new Date()) === -1) {
@@ -53,12 +45,15 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   const handleDateChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      const response = await axios.put("http://localhost:4050/" + task._id, {
-        date: e.target.value,
-      });
+      const response = await axios.put(
+        `http://localhost:4050/${task._id}/date`,
+        {
+          date: e.target.value,
+        }
+      );
       if (response.status === 200) {
         await dispatch(fetchTasks());
-        dispatch(sortByState());
+        dispatch(sortByDueDate());
         calculateTimeToDueDate();
       }
     } catch (error) {
@@ -90,18 +85,12 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       ) : (
         <span></span>
       )}
-      <div className={styles.description}>
-        <div className={styles.creation_date}>
-          {`Tarea creada hace ${formatDistanceToNow(
-            new Date(task.creationDate),
-            {
-              locale: esLocale,
-            }
-          )}`}
-        </div>
-        {task.description}
+      <div className={styles.creation_date}>
+        {`Tarea creada hace ${formatDistanceToNow(new Date(task.creationDate), {
+          locale: esLocale,
+        })}`}
       </div>
-
+      <TaskDescription task={task}></TaskDescription>
       <div className={styles.dates}>
         <div className={styles.dueDate}>
           <div>Vencimiento: </div>
@@ -112,7 +101,6 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           ></input>
         </div>
       </div>
-
       <DateStateIcon task={task} timeToDueDate={timeToDueDate}></DateStateIcon>
     </div>
   );
