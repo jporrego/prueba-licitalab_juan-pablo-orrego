@@ -10,16 +10,22 @@ import Popup from "reactjs-popup";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
+
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const initialState = useAppSelector(selectFilters);
   const [filters, setFilters] = useState<FiltersType>({
     content: initialState.content,
     dateRange: [],
-    taskState: [],
+    taskState: initialState.taskState,
   });
 
   useEffect(() => {
     handleFilterChange();
   }, [filters]);
+
+  useEffect(() => {
+    checkCheckedInputs();
+  }, [isPopupVisible]);
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let taskStateFilters = [...filters.taskState];
@@ -38,12 +44,50 @@ const Filters = () => {
     dispatch(updateFilters(filters));
   };
 
+  const checkCheckedInputs = () => {
+    if (filters.taskState.includes("freed")) {
+    }
+  };
+
+  const renderInputs = () => {
+    const options = ["Liberada", "Pendiente", "Atrasada"];
+    return options.map((option) =>
+      filters.taskState.includes(option) ? (
+        <div>
+          <input
+            type="checkbox"
+            id={option}
+            name={option}
+            value={option}
+            onChange={(e) => handleCheckboxChange(e)}
+            checked
+          />
+          <label htmlFor={option}>{option}</label>
+        </div>
+      ) : (
+        <div>
+          <input
+            type="checkbox"
+            id={option}
+            name={option}
+            value={option}
+            onChange={(e) => handleCheckboxChange(e)}
+          />
+          <label htmlFor="freed">{option} </label>
+        </div>
+      )
+    );
+  };
+
   return (
     <div className={styles.filter}>
       <Popup
-        trigger={(open) => (
+        trigger={() => (
           <button className={styles.button}>
-            <FaFilter className={styles.filterBtnOpen}></FaFilter>
+            <FaFilter
+              className={styles.filterBtnOpen}
+              onClick={() => setIsPopupVisible(!isPopupVisible)}
+            ></FaFilter>
           </button>
         )}
         position="bottom right"
@@ -63,6 +107,8 @@ const Filters = () => {
         </div>
 
         <div className={styles.filters_state}>
+          {renderInputs()}
+          {/*
           <div>
             <input
               type="checkbox"
@@ -73,6 +119,7 @@ const Filters = () => {
             />
             <label htmlFor="freed">Liberada </label>
           </div>
+
           <div>
             <input
               type="checkbox"
@@ -83,6 +130,7 @@ const Filters = () => {
             />
             <label htmlFor="expired">Atrasada </label>
           </div>
+
           <div>
             <input
               type="checkbox"
@@ -92,7 +140,7 @@ const Filters = () => {
               onChange={(e) => handleCheckboxChange(e)}
             />
             <label htmlFor="pending">Pendiente </label>
-          </div>
+          </div>*/}
         </div>
       </Popup>
     </div>

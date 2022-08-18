@@ -166,11 +166,11 @@ export const selectFilteredTasks = (state: RootState) => {
   filteredTasks = filteredTasks.filter((task) => {
     let taskState = "";
     if (task.done) {
-      taskState = "freed";
+      taskState = "Liberada";
     } else if (compareAsc(new Date(), new Date(task.dueDate)) !== 1) {
-      taskState = "pending";
+      taskState = "Pendiente";
     } else {
-      taskState = "expired";
+      taskState = "Atrasada";
     }
 
     if (filters.taskState.length === 0) {
