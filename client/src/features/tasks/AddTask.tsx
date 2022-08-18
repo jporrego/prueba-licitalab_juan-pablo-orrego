@@ -25,6 +25,9 @@ const AddTask = () => {
         date: date,
       });
       if (response.status === 200) {
+        setDescription("");
+        setDate(format(new Date(), "yyyy-MM-dd") + "T00:00:00");
+        setShowForm(false);
         await dispatch(fetchTasks());
         dispatch(sortByCurrentOrder());
       }
@@ -56,7 +59,10 @@ const AddTask = () => {
                 required
               />
             </div>
-            <button type="submit">Aceptar</button>
+            <div className={styles.btns}>
+              <button type="submit">Aceptar</button>
+              <div onClick={(e) => setShowForm(false)}>Cancelar</div>
+            </div>
           </form>
         </div>
       ) : (

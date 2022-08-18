@@ -180,10 +180,15 @@ svg {
     transform: scale(1)
 }
 
-.add_task button {
+.btns {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.add_task button {
     background-color: var(--blue);
     color: white;
 }
