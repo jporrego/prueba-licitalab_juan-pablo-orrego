@@ -43,7 +43,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = ({ task }) => {
       setShowForm(false);
       try {
         const response = await axios.put(
-          `http://localhost:4050/${task._id}/description`,
+          `http://localhost:4050/tasks/${task._id}/description`,
           {
             description: description,
           }
@@ -64,7 +64,8 @@ const TaskDescription: React.FC<TaskDescriptionProps> = ({ task }) => {
       ) : (
         <div>
           <textarea
-            id={styles.description}
+            id="description"
+            className={styles.description}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>

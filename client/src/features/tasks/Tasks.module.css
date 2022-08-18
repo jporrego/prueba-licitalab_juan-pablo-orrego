@@ -28,7 +28,7 @@
     justify-self: start;
 }
 
-#description {
+.description textarea {
     width: 100%;
     height: 75%;
     font-family: var(--font-primary);

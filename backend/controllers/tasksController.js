@@ -15,18 +15,14 @@ exports.task_list = async (req, res, next) => {
 
 exports.task_create = async function (req, res, next) {
   try {
-    const existingCategory = await Category.findOne({
-      name: req.body.name,
-    }).exec();
-    if (existingCategory !== null) {
-      res.sendStatus(409);
-    } else {
-      let category = new Category({
-        name: req.body.name,
-      });
-      category.save();
-      res.end();
-    }
+    const task = new Task({
+      description: req.body.description,
+      creationDate: new Date(),
+      dueDate: req.body.date,
+      done: false,
+    });
+    await task.save();
+    res.sendStatus(200);
   } catch (error) {
     return next(error);
   }

@@ -14,9 +14,12 @@ const FreeTasks = () => {
   const handleFreeTasks = async () => {
     if (selectedTasks.length > 0) {
       try {
-        const response = await axios.put("http://localhost:4050/:id/done", {
-          tasks: selectedTasks,
-        });
+        const response = await axios.put(
+          "http://localhost:4050/tasks/:id/done",
+          {
+            tasks: selectedTasks,
+          }
+        );
         if (response.status === 200) {
           await dispatch(fetchTasks());
           dispatch(sortByState());

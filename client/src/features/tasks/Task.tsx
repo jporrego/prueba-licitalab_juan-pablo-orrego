@@ -46,7 +46,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   const handleDateChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const response = await axios.put(
-        `http://localhost:4050/${task._id}/date`,
+        `http://localhost:4050/tasks/${task._id}/date`,
         {
           date: e.target.value,
         }

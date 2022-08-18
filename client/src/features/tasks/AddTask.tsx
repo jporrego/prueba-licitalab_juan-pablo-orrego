@@ -7,6 +7,7 @@ import {
 import { format } from "date-fns";
 import { FaPlus } from "react-icons/fa";
 import styles from "./Tasks.module.css";
+import axios from "axios";
 
 const AddTask = () => {
   const dispatch = useAppDispatch();
@@ -16,9 +17,20 @@ const AddTask = () => {
     format(new Date(), "yyyy-MM-dd") + "T00:00:00"
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ description, date });
+    try {
+      const response = await axios.post(`http://localhost:4050/`, {
+        description: description,
+        date: date,
+      });
+      if (response.status === 200) {
+        await dispatch(fetchTasks());
+        dispatch(sortByCurrentOrder());
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className={styles.add_task}>
