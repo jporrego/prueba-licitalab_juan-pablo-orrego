@@ -5,6 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import compareAsc from "date-fns/compareAsc";
+import parseISO from "date-fns/parseISO";
 import { RootState, AppThunk } from "../../app/store";
 import { Task, Filters } from "../../types";
 
@@ -153,6 +154,19 @@ export const selectFilteredTasks = (state: RootState) => {
     }
   });
 
+  // Aplly date range filter
+  if (filters.dateRange.startDate !== "" && filters.dateRange.endDate !== "") {
+    filteredTasks = filteredTasks.filter((task) => {
+      if (
+        new Date(task.dueDate).getTime() >=
+          new Date(filters.dateRange.startDate).getTime() &&
+        new Date(task.dueDate).getTime() <=
+          new Date(filters.dateRange.endDate).getTime()
+      ) {
+        return true;
+      }
+    });
+  }
   // Aplly text content filter
   filteredTasks = filteredTasks.filter((task) =>
     task.description.toLowerCase().includes(filters.content.toLowerCase())
