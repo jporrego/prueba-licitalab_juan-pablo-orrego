@@ -20,4 +20,7 @@ router.put("/tasks/:id/date", tasks_controller.task_edit_date);
 // PUT request to set task as done.
 router.put("/tasks/:id/done", tasks_controller.task_set_done);
 
+// DELETE request to delete task.
+router.delete("/tasks/:id/", tasks_controller.task_delete);
+
 module.exports = router;

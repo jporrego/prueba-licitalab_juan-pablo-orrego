@@ -193,6 +193,20 @@ svg {
     color: white;
 }
 
+.deleteTaskBtn {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    color: var(--grey-dark);
+    font-weight: 400;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.deleteTaskBtn:hover {
+    color: var(--red);
+}
+
 @media only screen and (min-width: 450px) {
 
     /* For desktop: */

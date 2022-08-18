@@ -20,7 +20,7 @@ const Order = () => {
     // Podria poner las tareas en el dependecy array de useEffect, pero por como programe las funciones para ordenar
     // estaria llamando el orden por defecto 'sortByCreationDate' cada vez que cambio el orden, por lo que siempre seria el mismo.
     // Con mas tiempo trataria de encontrar otra forma de hacerlo.
-    setTimeout(() => dispatch(sortByCreationDate()), 150);
+    setTimeout(() => dispatch(sortByCreationDate()), 500);
   }, []);
 
   function handleOrderChange(e: React.ChangeEvent<HTMLSelectElement>): void {

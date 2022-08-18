@@ -6,6 +6,7 @@ import {
   selectTasks,
   fetchTasks,
   sortByState,
+  sortByCurrentOrder,
   sortByDueDate,
 } from "../../features/tasks/tasksSlice";
 import { Task as TaskType } from "../../types";
@@ -61,6 +62,20 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     }
   };
 
+  const handleDeleteTask = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:4050/tasks/${task._id}/`
+      );
+      if (response.status === 200) {
+        await dispatch(fetchTasks());
+        dispatch(sortByCurrentOrder());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const taskBgStyle = () => {
     if (task.done) {
       return styles.bg_done;
@@ -102,6 +117,9 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         </div>
       </div>
       <DateStateIcon task={task} timeToDueDate={timeToDueDate}></DateStateIcon>
+      <div className={styles.deleteTaskBtn} onClick={() => handleDeleteTask()}>
+        Eliminar
+      </div>
     </div>
   );
 };

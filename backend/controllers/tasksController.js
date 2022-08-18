@@ -6,7 +6,6 @@ var async = require("async");
 exports.task_list = async (req, res, next) => {
   try {
     const result = await Task.find();
-    console.log(result);
     res.json(result);
   } catch (error) {
     res.sendStatus(500);
@@ -57,6 +56,15 @@ exports.task_set_done = async function (req, res, next) {
     req.body.tasks.forEach(async (task) => {
       await Task.findOneAndUpdate({ _id: task }, { done: true });
     });
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
+exports.task_delete = async function (req, res, next) {
+  try {
+    await Task.deleteOne({ _id: req.params.id });
     res.sendStatus(200);
   } catch (error) {
     res.sendStatus(500);
