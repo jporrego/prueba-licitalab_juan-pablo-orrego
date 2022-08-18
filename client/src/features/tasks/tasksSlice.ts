@@ -133,10 +133,11 @@ export const selectFilteredTasks = (state: RootState) => {
   const tasks = [...state.tasks.tasks];
   const filters = state.filters.filters;
 
-  let filteredTasks: Task[] = [];
+  let filteredTasks: Task[] = tasks;
 
   // Filter the tasks that match the states and add them to the filtered array.
 
+  /*
   if (filters.taskState.length > 0) {
     filters.taskState.forEach((state) => {
       if (state === "expired") {
@@ -161,7 +162,23 @@ export const selectFilteredTasks = (state: RootState) => {
     });
   } else {
     filteredTasks = tasks;
-  }
+  }*/
+  filteredTasks = filteredTasks.filter((task) => {
+    let taskState = "";
+    if (task.done) {
+      taskState = "freed";
+    } else if (compareAsc(new Date(), new Date(task.dueDate)) !== 1) {
+      taskState = "pending";
+    } else {
+      taskState = "expired";
+    }
+
+    if (filters.taskState.length === 0) {
+      return true;
+    } else if (filters.taskState.includes(taskState)) {
+      return true;
+    }
+  });
 
   // Aplly text content filter
   filteredTasks = filteredTasks.filter((task) =>
