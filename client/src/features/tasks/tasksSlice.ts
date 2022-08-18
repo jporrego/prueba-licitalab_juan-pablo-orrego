@@ -158,14 +158,14 @@ export const selectFilteredTasks = (state: RootState) => {
   if (filters.dateRange.startDate !== "") {
     filteredTasks = filteredTasks.filter(
       (task) =>
-        new Date(task.dueDate).getTime() >=
+        new Date(task.dueDate).getTime() >
         new Date(filters.dateRange.startDate).getTime()
     );
   }
   if (filters.dateRange.endDate !== "") {
     filteredTasks = filteredTasks.filter(
       (task) =>
-        new Date(task.dueDate).getTime() <=
+        new Date(task.dueDate).getTime() <
         new Date(filters.dateRange.endDate).getTime()
     );
   }
