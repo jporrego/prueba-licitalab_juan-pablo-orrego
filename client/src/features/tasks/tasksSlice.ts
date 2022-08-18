@@ -136,17 +136,27 @@ export const selectFilteredTasks = (state: RootState) => {
   let filteredTasks: Task[] = [];
 
   // Filter the tasks that match the states and add them to the filtered array.
+
   if (filters.taskState.length > 0) {
     filters.taskState.forEach((state) => {
       if (state === "expired") {
         filteredTasks = filteredTasks.concat(
-          tasks.filter((task) => compareAsc(new Date(), task.dueDate) === 1)
+          tasks.filter(
+            (task) =>
+              compareAsc(new Date(), new Date(task.dueDate)) === 1 && !task.done
+          )
         );
       }
       if (state === "pending") {
         filteredTasks = filteredTasks.concat(
-          tasks.filter((task) => compareAsc(new Date(), task.dueDate) !== 1)
+          tasks.filter(
+            (task) =>
+              compareAsc(new Date(), new Date(task.dueDate)) !== 1 && !task.done
+          )
         );
+      }
+      if (state === "freed") {
+        filteredTasks = filteredTasks.concat(tasks.filter((task) => task.done));
       }
     });
   } else {

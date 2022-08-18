@@ -1,10 +1,5 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  createEntityAdapter,
-  PayloadAction,
-} from "@reduxjs/toolkit";
-import { RootState, AppThunk } from "../../app/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 import { Filters as FiltersType } from "../../types";
 
 interface filterState {
@@ -20,13 +15,12 @@ const filtersSlice = createSlice({
   reducers: {
     updateFilters: (state, action: PayloadAction<FiltersType>) => {
       state.filters = action.payload;
+      /*
       state.filters = {
         content: action.payload.content,
         dateRange: [],
-        taskState: action.payload.taskState.filter(
-          (x) => !state.filters.taskState.includes(x)
-        ),
-      };
+        taskState: action.payload.taskState,
+      };*/
     },
   },
 });
