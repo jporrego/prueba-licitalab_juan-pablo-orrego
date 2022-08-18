@@ -49,11 +49,11 @@ const Filters = () => {
     }
   };
 
-  const renderInputs = () => {
+  const renderCheckboxes = () => {
     const options = ["Liberada", "Pendiente", "Atrasada"];
     return options.map((option) =>
       filters.taskState.includes(option) ? (
-        <div>
+        <div key={option}>
           <input
             type="checkbox"
             id={option}
@@ -65,7 +65,7 @@ const Filters = () => {
           <label htmlFor={option}>{option}</label>
         </div>
       ) : (
-        <div>
+        <div key={option}>
           <input
             type="checkbox"
             id={option}
@@ -107,7 +107,7 @@ const Filters = () => {
         </div>
 
         <div className={styles.filters_state}>
-          {renderInputs()}
+          {renderCheckboxes()}
           {/*
           <div>
             <input
