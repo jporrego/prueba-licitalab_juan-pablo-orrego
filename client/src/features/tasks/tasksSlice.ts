@@ -155,18 +155,21 @@ export const selectFilteredTasks = (state: RootState) => {
   });
 
   // Aplly date range filter
-  if (filters.dateRange.startDate !== "" && filters.dateRange.endDate !== "") {
-    filteredTasks = filteredTasks.filter((task) => {
-      if (
+  if (filters.dateRange.startDate !== "") {
+    filteredTasks = filteredTasks.filter(
+      (task) =>
         new Date(task.dueDate).getTime() >=
-          new Date(filters.dateRange.startDate).getTime() &&
-        new Date(task.dueDate).getTime() <=
-          new Date(filters.dateRange.endDate).getTime()
-      ) {
-        return true;
-      }
-    });
+        new Date(filters.dateRange.startDate).getTime()
+    );
   }
+  if (filters.dateRange.endDate !== "") {
+    filteredTasks = filteredTasks.filter(
+      (task) =>
+        new Date(task.dueDate).getTime() <=
+        new Date(filters.dateRange.endDate).getTime()
+    );
+  }
+
   // Aplly text content filter
   filteredTasks = filteredTasks.filter((task) =>
     task.description.toLowerCase().includes(filters.content.toLowerCase())

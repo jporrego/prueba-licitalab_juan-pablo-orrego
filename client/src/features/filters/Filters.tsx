@@ -125,6 +125,7 @@ const Filters = () => {
             <input
               type="date"
               id="startDate"
+              value={filters.dateRange.startDate}
               onChange={(e) => handleDateRangeChange(e)}
             />
           </div>
@@ -133,6 +134,7 @@ const Filters = () => {
             <input
               type="date"
               id="endDate"
+              value={filters.dateRange.endDate}
               onChange={(e) => handleDateRangeChange(e)}
             />
           </div>
