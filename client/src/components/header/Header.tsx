@@ -1,5 +1,5 @@
 import React from "react";
-import CurrentDate from "../currentDate/CurrentDate";
+import CurrentDate from "../current_date/CurrentDate";
 import styles from "./Header.module.css";
 
 const Header = () => {

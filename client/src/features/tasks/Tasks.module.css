@@ -127,6 +127,32 @@ svg {
     font-size: 1.2rem;
 }
 
+.add_task {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
+    font-size: 1.6rem;
+    background-color: var(--white)
+}
+
+.add_task svg {
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+}
+
+.add_task svg:hover {
+    transform: scale(1.1)
+}
+
+.add_task svg:active {
+    transform: scale(1)
+}
+
 @media only screen and (min-width: 450px) {
 
     /* For desktop: */
