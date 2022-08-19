@@ -1,8 +1,10 @@
 # Prueba Tecnica LicitaLab - Juan Pablo Orrego Contador
 
+![alt-text](https://github.com/jporrego/prueba-licitalab_juan-pablo-orrego/blob/main/src/assets/captura.jpg)
+
 ## Instrucciones de ejecución.
 
-Para ejecutar este proyecto hay que clonar el repositorio, y luego iniciar el Frontend y el backend con las siguientes instrucciones:
+Para ejecutar este proyecto hay que clonar el repositorio, y luego iniciar el Frontend y el backend de la siguiente forma:
 
 ### Backend (Node.js/Express/Mongoose):
 
