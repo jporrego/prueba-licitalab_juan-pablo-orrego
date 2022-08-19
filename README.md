@@ -8,11 +8,11 @@ Para ejecutar este proyecto hay que clonar el repositorio, y luego iniciar el Fr
 
 ### Backend (Node.js/Express/Mongoose):
 
-En la carpeta 'backend' ejecutar el comando `npm i`. Una vez que terminen de instalar los modulos, ejecutar `npm run dev` para iniciar el servidor en "http://localhost:4050".
+En la carpeta 'backend' ejecutar el comando `npm i`. Cuando terminen de instalar los modulos, ejecutar `npm run dev` para iniciar el servidor en "http://localhost:4050".
 
 ### Frontend (React/Typescript/Redux):
 
-En la carpeta 'client' ejecutar el comando `npm i`. Una vez que terminen de instalar los modulos, ejecutar `npm start` para correr la aplicacion en "http://localhost:3000" en el navegador.
+En otra ventana del simbolo de sistema, ir a la carpeta 'client' y ejecutar el comando `npm i`. Cuando terminen de instalar los modulos, ejecutar `npm start` para correr la aplicacion en "http://localhost:3000" por defecto en el navegador.
 
 ## Notas
 
