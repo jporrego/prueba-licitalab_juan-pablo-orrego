@@ -16,4 +16,5 @@ En la carpeta 'client' ejecutar el comando `npm i`. Una vez que terminen de inst
 
 ## Notas
 
+- El backend y el frontend deben estar corriendo al mismo tiempo para que el proyecto funcione.
 - En la carpeta backend se puede ejecutar el comando `node populatedb.js` si se desea generar tareas nuevas rapidamente para testear.
