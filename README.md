@@ -1,6 +1,6 @@
 # Prueba Tecnica LicitaLab - Juan Pablo Orrego Contador
 
-![alt-text](https://github.com/jporrego/prueba-licitalab_juan-pablo-orrego/blob/main/src/assets/captura.jpg)
+![alt-text](https://github.com/jporrego/prueba-licitalab_juan-pablo-orrego/blob/main/client/src/assets/captura.jpg)
 
 ## Instrucciones de ejecución.
 
